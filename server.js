@@ -94,7 +94,17 @@ function writeRows(rows) {
 
 const server = http.createServer((req, res) => {
   // CORS headers
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  const allowedOrigins = [
+    "http://localhost:5173",
+    "https://work-shift-calculator-app.vercel.app",
+  ];
+
+  const origin = req.headers.origin || "";
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, OPTIONS"
